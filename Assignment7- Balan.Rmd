@@ -5,7 +5,7 @@ date: "December 21, 2017"
 output: html_document
 ---
 
-##Remove special characters, padding (the white space before and after the text) from Street 1 and Street 2 variables. Make sure the first letters of street names are capitalized and the street denominations are following the same standard (for example, all streets are indicated as âstr.â, avenues as âave.â, etc.
+##Remove special characters, padding (the white space before and after the text) from Street 1 and Street 2 variables. Make sure the first letters of street names are capitalized and the street denominations are following the same standard (for example, all streets are indicated as str, avenues as ave, etc.
 
 ```{r Removes Special Characters, echo=TRUE}
 #This code will Remove special characters, padding (the white space before and after the text) 
