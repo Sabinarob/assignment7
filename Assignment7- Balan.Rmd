@@ -1,0 +1,58 @@
+---
+title: "Assignment_7"
+author: "The R Squad"
+date: "December 21, 2017"
+output: html_document
+---
+
+##Remove special characters, padding (the white space before and after the text) from Street 1 and Street 2 variables. Make sure the first letters of street names are capitalized and the street denominations are following the same standard (for example, all streets are indicated as âstr.â, avenues as âave.â, etc.
+
+```{r Removes Special Characters, echo=TRUE}
+#This code will Remove special characters, padding (the white space before and after the text) 
+#from Street 1 and Street 2 variables
+data$Street = gsub("[^A-Za-z ]", " ",data$Street)
+data$Street = gsub("(?<=[\\s])\\s*|^\\s+|\\s+$", "", data$Street, perl=TRUE)
+data$Street
+
+data$`Street 2` = gsub("[^A-Za-z ]", " ", data$`Street 2`)
+data$`Street 2` = gsub("(?<=[\\s])\\s*|^\\s+|\\s+$", "", data$`Street 2`, perl=TRUE)
+data$`Street 2` 
+
+data$Street = gsub("(^|[[:space:]])([[:alpha:]])", "\\1\\U\\2", data$Street, perl=TRUE)
+data$`Street 2` =  gsub("(^|[[:space:]])([[:alpha:]])", "\\1\\U\\2", data$`Street 2`, perl=TRUE)
+
+```
+
+```{r}
+# This Code will Make sure the first letters of street names are capitalized and the street #denominations are following the same standard (for example, all streets are indicated as #Ã¢str.Ã¢,avenues 
+
+patterns     <- c("Lane", "Road", "Avenue", "Green", "Hospital", "Village", "Center", "Drive", "Circle", "Park","Street")
+replacements <- c("Lan.",  "Rd.", "Ave.", "Gr.","Hosp.","Vil.","Ctr.", "Dr.", "Cr.","Pk.","Str.")
+
+data$Street = gsubfn("\\b\\w+\\b", as.list(setNames(replacements, patterns)), data$Street)
+data$`Street 2` =  gsubfn("\\b\\w+\\b", as.list(setNames(replacements, patterns)), data$`Street 2`)
+
+
+```
+#If the value in Street 2 duplicates the value in Street 1, remove the value in Street 2
+
+```{r remove duplicates, echo=TRUE}
+
+#  If the value in Street 2 duplicates the value in Street 1, 
+# this code will remove the value in Street 2
+
+
+i = 1
+
+while(i < nrow(data)) 
+{
+  if(data$Street[i] == data$`Street 2` [i]) 
+  {
+    data$`Street 2` [i] = ""
+  }
+  i=i+1
+}
+
+
+
+```
